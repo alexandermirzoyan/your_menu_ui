@@ -1,10 +1,11 @@
 import React from 'react';
-import burgerImage from './assets/images/burger.svg';
+import { Switch, Route } from 'react-router-dom';
+import Welcome from './screens/Welcome/Welcome';
 
 const App = () => (
-  <div className='App'>
-    <img src={burgerImage} alt='burger' />
-  </div>
+  <Switch>
+    <Route path='/' component={Welcome} />
+  </Switch>
 );
 
 export default App;
