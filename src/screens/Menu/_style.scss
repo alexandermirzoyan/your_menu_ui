@@ -1,9 +1,31 @@
+@import "./src/assets/scss/_variables.scss";
+
 .menu-screen-wrapper {
-  .menu-item-wrapper {
-    padding: 0 20px;
-    .menu-item-image-wrapper {
-      width: 150px;
-      margin-right: 10px;
+  min-height: 100vh;
+  background-color: $light-bg;
+  .menu-item-row-wrapper {
+    padding-top: 20px;
+    .menu-item-wrapper {
+      padding: 20px;
+      background-color: #DDDAD9;
+      .menu-item-image-wrapper {
+        width: 150px;
+        margin-right: 10px;
+      }
+      .menu-item-info-wrapper {
+        .item-count-wrapper {
+          .item-count-text {
+            margin: 0 20px;
+          }
+          button {
+            border: none;
+            background-color: $dark-bg;
+            color: white;
+            height: 30px;
+            width: 30px;
+          }
+        }
+      }
     }
   }
 }
