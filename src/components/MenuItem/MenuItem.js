@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './_style.scss';
 
 const MenuItem = ({
-  image, itemName, itemRecipe, itemPrice,
+  id, image, itemName, itemRecipe, itemPrice,
 }) => {
   const [itemsCount, setItemsCount] = useState(0);
 
@@ -15,8 +15,8 @@ const MenuItem = ({
   };
 
   return (
-    <div className='d-flex align-items-center menu-item-wrapper'>
-      <div className='menu-item-image-wrapper'>
+    <div key={id} className='d-flex align-items-center menu-item-wrapper'>
+      <div className='d-flex justify-content-center align-items-center menu-item-image-wrapper'>
         <img src={image} alt='menu-item' />
       </div>
       <div className='menu-item-info-wrapper'>

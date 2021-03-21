@@ -4,8 +4,10 @@
   margin-bottom: 20px;
   padding: 20px;
   background-color: #DDDAD9;
+  width: 50vw;
   .menu-item-image-wrapper {
     width: 150px;
+    height: 150px;
     margin-right: 10px;
   }
   .menu-item-info-wrapper {
@@ -21,5 +23,11 @@
         width: 30px;
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .menu-item-wrapper {
+    width: 100vw;
   }
 }
