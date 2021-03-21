@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setMenuItemCount } from '../../redux/actions/menuItemActions';
 import './_style.scss';
 
 const MenuItem = ({
   id, image, itemName, itemRecipe, itemPrice,
 }) => {
+  const dispatch = useDispatch();
   const [itemsCount, setItemsCount] = useState(0);
 
   const toggleItemsCount = (type) => {
     if (type === 'increment') {
       setItemsCount(itemsCount + 1);
+      dispatch(setMenuItemCount(8));
     } else if (itemsCount !== 0) {
       setItemsCount(itemsCount - 1);
+      dispatch(setMenuItemCount(-20));
     }
   };
 
