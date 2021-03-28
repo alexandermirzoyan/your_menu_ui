@@ -6,7 +6,7 @@ import Menu from './screens/Menu/Menu';
 const App = () => (
   <Switch>
     <Route path='/' component={Welcome} exact />
-    <Route path='/menu/:name/:table' component={Menu} exact />
+    <Route path='/menu/:entityId/:entityTable' component={Menu} exact />
   </Switch>
 );
 

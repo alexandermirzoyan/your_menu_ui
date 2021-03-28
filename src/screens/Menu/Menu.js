@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
 import amarayin from '../../assets/images/amarayin.jpeg';
 import tabule from '../../assets/images/tabule.jpeg';
@@ -80,8 +81,15 @@ const filteredMenuItemsList = {
 };
 
 const Menu = (props) => {
-  const entityName = props.match.params.name;
-  const entityTable = props.match.params.table;
+  const { entityId, entityTable } = props.match.params;
+
+  useEffect(() => {
+    axios.get(`http://localhost:8080/MenuItems?entity=${entityId}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div className='menu-screen-wrapper'>
