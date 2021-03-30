@@ -1,15 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMenuItems } from '../../redux/thunks/menuItemThunks';
-
-import amarayin from '../../assets/images/amarayin.jpeg';
-import tabule from '../../assets/images/tabule.jpeg';
-import hummus from '../../assets/images/hummus.jpeg';
-import lahmajoAngus from '../../assets/images/lahmajo_angus.jpeg';
-import lahmajoSpicy from '../../assets/images/lahmajo_spicy.jpeg';
-import lahmajoGrenade from '../../assets/images/lahmajoGrenade.jpeg';
-import tawouk from '../../assets/images/tawouk.jpeg';
-import lconacSmbuk from '../../assets/images/lconac_smbuk.jpeg';
+import { getMediaFileFromServer } from '../../utils/getMediaFileFromServer';
 
 import './_style.scss';
 import MenuItemTitle from '../../components/MenuItemTitle/MenuItemTitle';
@@ -35,7 +27,7 @@ const Menu = (props) => {
                 menuItemList.menu[menuItemKey].data.map((menuItem, index) => (
                   <MenuItem
                     id={index}
-                    image={amarayin}
+                    image={getMediaFileFromServer(menuItem.image)}
                     itemName={menuItem.name}
                     itemRecipe={menuItem.ingridient}
                     itemPrice={menuItem.price}
