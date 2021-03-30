@@ -1,8 +1,11 @@
 import produce from 'immer';
-import { SET_MENU_ITEM_COUNT } from '../constants';
+import { SET_MENU_ITEM_COUNT, GET_MENU_ITEMS } from '../constants';
 
 const initialState = {
+  loading: { type: '', status: false },
+  errorMessage: { type: '', text: '' },
   selectedItemsCount: 0,
+  menuItemList: null,
 };
 
 const menuItemReducer = (state = initialState, action) => {
@@ -11,9 +14,24 @@ const menuItemReducer = (state = initialState, action) => {
       return produce(state, (draft) => {
         draft.selectedItemsCount = action.payload;
       });
-    case 'SOME_OTHER_CASE':
-      // some other case stuff
-      break;
+    case GET_MENU_ITEMS.start:
+      return produce(state, (draft) => {
+        draft.loading.type = 'GetMenuItems';
+        draft.loading.status = true;
+        draft.errorMessage.type = '';
+        draft.errorMessage.text = '';
+      });
+    case GET_MENU_ITEMS.success:
+      return produce(state, (draft) => {
+        draft.loading.status = false;
+        draft.menuItemList = action.payload.menuItemList;
+      });
+    case GET_MENU_ITEMS.fail:
+      return produce(state, (draft) => {
+        draft.loading.status = false;
+        draft.errorMessage.type = 'GetMenuItems';
+        draft.errorMessage.text = action.error;
+      });
     default:
       return state;
   }
