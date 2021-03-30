@@ -4,7 +4,7 @@ import { SET_MENU_ITEM_COUNT, GET_MENU_ITEMS } from '../constants';
 const initialState = {
   loading: { type: '', status: false },
   errorMessage: { type: '', text: '' },
-  selectedItemsCount: 0,
+  selectedItems: [],
   menuItemList: null,
 };
 
@@ -12,7 +12,7 @@ const menuItemReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MENU_ITEM_COUNT:
       return produce(state, (draft) => {
-        draft.selectedItemsCount = action.payload;
+        draft.selectedItems.push(action.payload);
       });
     case GET_MENU_ITEMS.start:
       return produce(state, (draft) => {

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setMenuItemCount } from '../../redux/actions/menuItemActions';
+import { getMediaFileFromServer } from '../../utils/getMediaFileFromServer';
+
 import './_style.scss';
 
 const MenuItem = ({
@@ -12,17 +14,29 @@ const MenuItem = ({
   const toggleItemsCount = (type) => {
     if (type === 'increment') {
       setItemsCount(itemsCount + 1);
-      dispatch(setMenuItemCount(8));
+      dispatch(setMenuItemCount({
+        id,
+        image,
+        itemName,
+        itemRecipe,
+        itemPrice,
+      }));
     } else if (itemsCount !== 0) {
       setItemsCount(itemsCount - 1);
-      dispatch(setMenuItemCount(-20));
+      dispatch(setMenuItemCount({
+        id,
+        image,
+        itemName,
+        itemRecipe,
+        itemPrice,
+      }));
     }
   };
 
   return (
     <div key={id} className='d-flex align-items-center menu-item-wrapper'>
       <div className='d-flex justify-content-center align-items-center menu-item-image-wrapper'>
-        <img src={image} alt='menu-item' />
+        <img src={getMediaFileFromServer(image)} alt='menu-item' />
       </div>
       <div className='menu-item-info-wrapper'>
         <p className='font-weight-bold'>{itemName}</p>

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMenuItems } from '../../redux/thunks/menuItemThunks';
-import { getMediaFileFromServer } from '../../utils/getMediaFileFromServer';
 
 import './_style.scss';
 import MenuItemTitle from '../../components/MenuItemTitle/MenuItemTitle';
@@ -27,7 +26,7 @@ const Menu = (props) => {
                 menuItemList.menu[menuItemKey].data.map((menuItem, index) => (
                   <MenuItem
                     id={index}
-                    image={getMediaFileFromServer(menuItem.image)}
+                    image={menuItem.image}
                     itemName={menuItem.name}
                     itemRecipe={menuItem.ingridient}
                     itemPrice={menuItem.price}
