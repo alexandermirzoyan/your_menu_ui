@@ -7,3 +7,19 @@
     padding-top: 20px;
   }
 }
+
+.total-button-wrapper {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .total-button {
+    width: 200px;
+    padding: 5px;
+    border: none;
+    border-radius: 50px;
+    background-color: $red;
+    color: $light-bg;
+  }
+}

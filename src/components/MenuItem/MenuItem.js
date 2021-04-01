@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMenuItemCount, updateMenuItemCount } from '../../redux/actions/menuItemActions';
 import { getMediaFileFromServer } from '../../utils/getMediaFileFromServer';
+import { formatNumber } from '../../utils/formatNumber';
 
 import './_style.scss';
 
@@ -49,7 +50,7 @@ const MenuItem = ({
       <div className='menu-item-info-wrapper'>
         <p className='font-weight-bold'>{itemName}</p>
         <p>{itemRecipe}</p>
-        <p>{itemPrice} ֏</p>
+        <p>{formatNumber(itemPrice)} ֏</p>
         <div className='d-flex align-items-center item-count-wrapper' >
           <button onClick={() => toggleItemsCount('decrement')}>-</button>
           <p className='item-count-text'>{itemsCount}</p>
