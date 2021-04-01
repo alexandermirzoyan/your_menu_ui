@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMenuItems } from '../../redux/thunks/menuItemThunks';
 import { formatNumber } from '../../utils/formatNumber';
@@ -6,11 +6,13 @@ import { formatNumber } from '../../utils/formatNumber';
 import './_style.scss';
 import MenuItemTitle from '../../components/MenuItemTitle/MenuItemTitle';
 import MenuItem from '../../components/MenuItem/MenuItem';
+import Popup from '../../components/Popup/Popup';
 
 const Menu = (props) => {
   const dispatch = useDispatch();
   const menuItemList = useSelector((state) => state.menuItem.menuItemList);
   const selectedItems = useSelector((state) => state.menuItem.selectedItems);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const { entityId, entityTable } = props.match.params;
 
   const getTotal = () => {
@@ -54,10 +56,20 @@ const Menu = (props) => {
       {
         getTotal() !== 0
           ? <div className='total-button-wrapper'>
-            <button className='total-button'>
-              Հաստատել - {formatNumber(getTotal())} ֏
+            <button onClick={() => setIsPopupVisible(true)} className='total-button'>
+              Պատվիրել - {formatNumber(getTotal())} ֏
             </button>
           </div>
+          : null
+      }
+
+      {
+        isPopupVisible
+          ? <Popup
+              onClose={() => setIsPopupVisible(false)}
+              selectedItems={selectedItems}
+              total={formatNumber(getTotal())}
+            />
           : null
       }
     </>
