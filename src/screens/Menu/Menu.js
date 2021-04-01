@@ -25,7 +25,7 @@ const Menu = (props) => {
               {
                 menuItemList.menu[menuItemKey].data.map((menuItem, index) => (
                   <MenuItem
-                    id={index}
+                    id={menuItem.id}
                     image={menuItem.image}
                     itemName={menuItem.name}
                     itemRecipe={menuItem.ingridient}

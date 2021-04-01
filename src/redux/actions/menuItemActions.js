@@ -1,7 +1,12 @@
-import { SET_MENU_ITEM_COUNT, GET_MENU_ITEMS } from '../constants';
+import { SET_MENU_ITEM_COUNT, UPDATE_MENU_ITEM_COUNT, GET_MENU_ITEMS } from '../constants';
 
 export const setMenuItemCount = (payload) => ({
   type: SET_MENU_ITEM_COUNT,
+  payload,
+});
+
+export const updateMenuItemCount = (payload) => ({
+  type: UPDATE_MENU_ITEM_COUNT,
   payload,
 });
 

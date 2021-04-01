@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setMenuItemCount } from '../../redux/actions/menuItemActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMenuItemCount, updateMenuItemCount } from '../../redux/actions/menuItemActions';
 import { getMediaFileFromServer } from '../../utils/getMediaFileFromServer';
 
 import './_style.scss';
@@ -9,27 +9,35 @@ const MenuItem = ({
   id, image, itemName, itemRecipe, itemPrice,
 }) => {
   const dispatch = useDispatch();
+  const selectedItems = useSelector((state) => state.menuItem.selectedItems);
   const [itemsCount, setItemsCount] = useState(0);
+
+  const handleSelectedItems = (type) => {
+    const index = selectedItems.findIndex((item) => parseInt(item.id) === parseInt(id));
+    const count = type === 'increment' ? itemsCount + 1 : itemsCount - 1;
+
+    if (index === -1) {
+      dispatch(setMenuItemCount([...selectedItems, {
+        id,
+        count,
+        name: itemName,
+        pricePerOne: itemPrice,
+      }]));
+    } else {
+      dispatch(updateMenuItemCount({
+        id,
+        count,
+      }));
+    }
+  };
 
   const toggleItemsCount = (type) => {
     if (type === 'increment') {
       setItemsCount(itemsCount + 1);
-      dispatch(setMenuItemCount({
-        id,
-        image,
-        itemName,
-        itemRecipe,
-        itemPrice,
-      }));
+      handleSelectedItems('increment');
     } else if (itemsCount !== 0) {
       setItemsCount(itemsCount - 1);
-      dispatch(setMenuItemCount({
-        id,
-        image,
-        itemName,
-        itemRecipe,
-        itemPrice,
-      }));
+      handleSelectedItems('decrement');
     }
   };
 

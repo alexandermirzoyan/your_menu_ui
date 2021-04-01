@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { SET_MENU_ITEM_COUNT, GET_MENU_ITEMS } from '../constants';
+import { SET_MENU_ITEM_COUNT, GET_MENU_ITEMS, UPDATE_MENU_ITEM_COUNT } from '../constants';
 
 const initialState = {
   loading: { type: '', status: false },
@@ -12,7 +12,12 @@ const menuItemReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MENU_ITEM_COUNT:
       return produce(state, (draft) => {
-        draft.selectedItems.push(action.payload);
+        draft.selectedItems = action.payload;
+      });
+    case UPDATE_MENU_ITEM_COUNT:
+      return produce(state, (draft) => {
+        const index = state.selectedItems.findIndex((item) => parseInt(item.id) === parseInt(action.payload.id));
+        draft.selectedItems[index].count = action.payload.count;
       });
     case GET_MENU_ITEMS.start:
       return produce(state, (draft) => {
