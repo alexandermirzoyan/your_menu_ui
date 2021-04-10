@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
 import { getMenuItems } from '../../redux/thunks/menuItemThunks';
 import { formatNumber } from '../../utils/formatNumber';
 
@@ -22,6 +25,40 @@ const Menu = (props) => {
     });
 
     return total;
+  };
+
+  const setItemsOrder = () => {
+    let order = '';
+    selectedItems.map((item) => {
+      order += `${item.name} - ${item.count} հատ \n`;
+    });
+
+    axios.post('http://localhost:8080/SetOrder', { order, tableNumber: entityTable })
+      .then((response) => {
+        if (response.data.resultCode === 1) {
+          toast.success(response.data.result, {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setIsPopupVisible(false);
+        }
+      })
+      .catch(() => {
+        toast.error('Կապի խնդիր', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
 
   useEffect(() => {
@@ -67,6 +104,7 @@ const Menu = (props) => {
         isPopupVisible
           ? <Popup
               onClose={() => setIsPopupVisible(false)}
+              onSubmit={setItemsOrder}
               selectedItems={selectedItems}
               total={formatNumber(getTotal())}
             />
